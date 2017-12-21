@@ -1,0 +1,46 @@
+<section class="content-header">
+    <h3>
+        性能参数配置
+        <small>通过这个页面，可以设置温度、湿度、氨气浓度预警及报警的上下限阀值</small>
+    </h3>
+</section>
+<section class="content container-fluid">
+    <table id="parameter-table" class="display" width='100%' cellspacing='0'></table>
+</section>
+<div class="modal fade" id="modifyPanel" tabindex="-1" role="dialog" aria-labelledby="modifyPanel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><span></span>修改参数信息</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="parameterForm" novalidate="novalidate">
+                    <div class="form-group">
+                        <div class="row form-line">
+                            <label class="col-md-3 control-label">类型</label>
+                            <input class="col-md-7" id="update-type"/>
+                            <label class="col-md-2"></label>
+                        </div>
+                        <div class="row form-line">
+                            <label class="col-md-3 control-label">上限阈值</label>
+                            <input class="col-md-7" id="update-high"/>
+                            <label class="col-md-2"></label>
+                        </div>
+                        <div class="row form-line">
+                            <label class="col-md-3 control-label">下限阈值</label>
+                            <input class="col-md-7" id="update-low"/>
+                            <label class="col-md-2"></label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" id="submitParameter">提交</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="/js/parameter.js"></script>

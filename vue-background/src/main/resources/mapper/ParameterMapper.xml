@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.vue.admin.mapper.ParameterMapper">
+    <resultMap id="parameterMap" type="com.vue.admin.entity.Parameter"></resultMap>
+
+    <select id="queryParamsByType" resultMap="parameterMap">
+        select `type`,low,high from parameter where `type` like concat(concat('%',#{name}),'%')
+    </select>
+
+    <select id="queryParameters" resultMap="parameterMap">
+        select `type`,low,high from parameter
+    </select>
+
+    <update id="updateParamInfo">
+        update parameter set low=#{low}, high=#{high} where `type`=#{name}
+    </update>
+</mapper>

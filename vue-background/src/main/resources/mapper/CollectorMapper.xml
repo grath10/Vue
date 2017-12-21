@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.vue.admin.mapper.CollectorMapper">
+    <resultMap id="perfValMap" type="com.vue.admin.entity.PerfData">
+        <!--<result property="tempAvg" column="avgtemp" />-->
+    </resultMap>
+
+    <select id="getCollectValuesByTypeAndTime" parameterType="java.util.Map" resultMap="perfValMap">
+        select collecttime,${queryColumn} from perf_data where device = #{device}
+        and <![CDATA[ collecttime >= #{startTime} and collecttime <= #{endTime}
+        ]]> order by collecttime asc
+    </select>
+
+    <select id="getValuesByTime" parameterType="java.util.Map" resultMap="perfValMap">
+        select collecttime,avgTemp,maxTemp,minTemp,avgHumid,minHumid,maxHumid,avgGas,minGas,maxGas from perf_data where device = #{device}
+        and <![CDATA[ collecttime >= #{startTime} and collecttime <= #{endTime} ]]> order by ${column} ${dir}
+    </select>
+
+    <select id="getValuesByType" parameterType="java.util.Map" resultMap="perfValMap">
+        select collecttime, device, ${queryColumn} from perf_data
+        <where>
+          device in
+            <foreach item="item" index="index" collection="device" open="(" separator="," close=")">
+              #{item}
+            </foreach>
+            and <![CDATA[ collecttime >= #{startTime} and collecttime <= #{endTime} ]]>
+        </where>
+        <if test="table != null">
+            order by ${order} ${dir}
+        </if>
+    </select>
+
+    <select id="getGlobalValueByType" parameterType="java.util.Map" resultMap="perfValMap">
+      select collecttime, ${queryColumn} as ${type} from perf_Data
+      where <![CDATA[ collecttime >= #{startTime} and collecttime <= #{endTime}
+        ]]> group by collecttime
+    </select>
+</mapper>

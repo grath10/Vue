@@ -1,0 +1,102 @@
+<section class="content-header">
+    <h3>
+        数据分析-按类型查看
+        <small>通过这个页面，可以按类型查看对应设备的历史采集数据</small>
+    </h3>
+</section>
+<section class="content container-fluid">
+    <div>
+        <div class="box box-default">
+            <div class="box-header with-border">
+                <h3 class="box-title">
+                    <i class="fa fa-filter" aria-hidden="true">统计条件</i>
+                </h3>
+                <input style="display: none;" type="text" value="type" id="pageType"/>
+                <div class="box-tools pull-right">
+                    <button class="btn btn-box-tool" data-widget="collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="box-body">
+                <form id="queryForm">
+                    <div class="row">
+                        <div class="form-group col-md-2">
+                            <label for="dtp_input_date">时间</label>
+                            <div class="input-group date form-datetime">
+                                <input class="form-control" id="date-time-picker" name="selectedTime" value="" readonly="readonly" data-link-field="dtp_input_date"/>
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                            </div>
+                            <input type="hidden" id="dtp_input_date" />
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label>类型</label>
+                            <select class="form-control" id="type-perf-name" name="perf">
+                                <option value="Temp">温度</option>
+                                <option value="Humid">湿度</option>
+                                <option value="Gas">氨气浓度</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label>指标</label>
+                            <select class="form-control" id="type-perf-key" name="index">
+                                <option value="avg">均值</option>
+                                <option value="max">最大值</option>
+                                <option value="min">最小值</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>设备清单</label>
+                            <select class="form-control" name="device" id='type-perf-device'></select>
+                        </div>
+                        <div class="form-group col-md-2 pull-right">
+                            <div class="input-group" style="width:100%">
+                                <button class="btn btn-primary" type="button" id="type-query">
+                                    <i class="fa fa-search" aria-hidden="true"></i>查询
+                                </button>
+                                <button class="btn btn-primary" type="button" id="type-export">
+                                    <i class="fa fa-print" aria-hidden="true"></i>导出
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title"><i class="fa fa-list-alt" aria-hidden="true"></i>曲线图</h3>
+            <div class="box-tools pull-right">
+                <button class="btn btn-box-tool" data-widget="collapse">
+                    <i class="fa fa-minus"></i>
+                </button>
+            </div>
+        </div>
+        <div class="box-body">
+            <form id="chartForm" style="display: none" method="post">
+                <input id="imageCode" name="base64Info" type="text" />
+                <input id="fileName" name="fileName" type="text" />
+                <input id="paramsQuery" name="params" type="text" />
+                <input id="queryType" name="type" type="text" />
+            </form>
+            <div id="hiddenTypeDevice" style="width:auto;height:350px;display: none"></div>
+            <div class="col-md-12" id="typeDevice" style="height:350px;"></div>
+        </div>
+    </div>
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title"><i class="fa fa-list-alt" aria-hidden="true"></i>数据</h3>
+            <div class="box-tools pull-right">
+                <button class="btn btn-box-tool" data-widget="collapse">
+                    <i class="fa fa-minus"></i>
+                </button>
+            </div>
+        </div>
+        <div class="box-body">
+            <table id="type-history-table" class="display" width='100%' cellspacing='0'></table>
+        </div>
+    </div>
+</section>
+<script src="/js/history.js" />

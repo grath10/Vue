@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <div style="padding:10px">
+            <button type="button" class="btn btn-primary" id="back">返回</button>
+        </div>
+        <iframe id='reportDisplayArea' width="100%"></iframe>
+    </body>
+    <script>
+        var adjustHeight = $('#main-content').height() - 60;
+        $("#reportDisplayArea").css({
+            "margin-left": "10px",
+            "height": adjustHeight
+        });
+        $("#back").return();
+    </script>
+</html>

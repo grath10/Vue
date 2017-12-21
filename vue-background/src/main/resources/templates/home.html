@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>农业综合管理信息平台</title>
+    <link rel="stylesheet" href="/css/main.css"/>
+    <link rel="stylesheet" href="/css/bootstrap/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/css/bootstrap-switch/bootstrap-switch.min.css"/>
+    <link rel="stylesheet" href="/css/daterangepicker.css"/>
+    <link rel="stylesheet" href="/css/font/font-awesome.min.css"/>
+    <!--<link rel="stylesheet" href="/js/plugins/jQueryUI/jquery-ui.min.css" />-->
+    <link rel="stylesheet" href="/css/AdminLTE.min.css"/>
+    <link rel="stylesheet" href="/css/skins/skin-blue-light.min.css"/>
+    <link rel="stylesheet" href="/css/jquery.dataTables.css"/>
+    <link rel="stylesheet" href="/js/plugins/select2/css/select2.min.css"/>
+    <link rel="stylesheet" href="/js/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css" />
+    <style>
+        select {
+            border: 1px dotted black;
+        }
+
+        .error {
+            z-index: 999;
+            color: red;
+        }
+
+        .red{
+            background-color: red;
+            padding: 8px;
+        }
+
+        .yellow{
+            background-color: yellow;
+            padding: 8px;
+        }
+
+        .green{
+            background-color: green;
+            padding: 8px;
+        }
+
+        input:focus {
+            border: 1px dotted black;
+        }
+
+        select.error {
+            border: 1px dotted #ff0a29;
+            background-color: red;
+            color: red;
+        }
+
+        input.error {
+            border: 1px dotted #ff0a29;
+            background-color: #fff00c;
+        }
+
+        .info-box-status:hover {
+            -webkit-box-shadow: 3px 3px 3px;
+            -moz-box-shadow: 3px 3px 3px;
+            box-shadow: 3px 3px 3px;
+        }
+
+        .info-box-number {
+            display: inline-block;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .max {
+            color: red;
+        }
+
+        .min {
+            color: green;
+        }
+    </style>
+    <script src="/js/thirdparty/jquery-2.2.3.min.js"></script>
+    <!--<script src="/js/plugins/jQueryUI//jquery-ui.min.js"></script>-->
+</head>
+<body class="skin-blue-light sidebar-mini sidebar-collapse">
+<div class="wrapper">
+    <div th:replace="fragments/header::header"/>
+    <div th:replace="fragments/sidebar::sidebar"/>
+    <div class="content-wrapper" id="main-content">
+        <div th:replace="index::mainContent"/>
+    </div>
+    <div th:replace="fragments/footer::footer"/>
+</div>
+</body>
+<script src="/js/thirdparty/bootstrap.min.js"/>
+<script src="/js/thirdparty/adminlte.min.js"/>
+<script src="/js/startUp.js"/>
+<script src="/js/app.js"/>
+<script src="/js/tools.js"/>
+<script src="/js/plugins/toastr/toastr.min.js"/>
+<script src="/js/thirdparty/jquery.dataTables.js"/>
+<script src="/js/plugins/select2/js/select2.min.js"/>
+<script src="/js/plugins/select2/js/i18n/zh-CN.js"/>
+<script src="/js/thirdparty/echarts.min.js"/>
+<script src="/js/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.js" />
+<script src="/js/plugins/bootstrap-datetimepicker/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8" />
+<script>
+    $(".info-box-status").click(function () {
+        var link = $(this).attr("link");
+        if (link) {
+            // push to history step
+            historyObj.push(link);
+            $("#main-content").load(link, function (response, status, xhr) {
+                if (status == "success") {
+                    $("#main-content a[target]").convertlink();
+                    $(document).trigger('_child_page_ready');
+                }
+                else {
+                    $("#li-busy").css('display', 'none');
+                    historyObj.pop();
+                }
+            });
+        }
+    });
+</script>
+</html>
