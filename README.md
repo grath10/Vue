@@ -3,6 +3,7 @@
 
 # 使用说明
 (1)将Vue-background子项目导入相应IDE工具，运行起来
+
 (2)cd vue-element-admin
    npm install
    npm run dev
