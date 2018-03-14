@@ -13,7 +13,7 @@
       <el-table-column align="center" label="用户名" prop="name"></el-table-column>
       <el-table-column align="center" label="角色" prop="desc"></el-table-column>
       <el-table-column fixed="right" align="center" label="操作" width="150">
-        <template scope="scope">
+        <template slot-scope="scope">
           <el-button v-if="userManager_btn_edit" size="small" type="success" @click="handleUpdate(scope.row)">编辑
           </el-button>
           <el-button v-if="userManager_btn_del" size="small" type="danger" @click="handleDelete(scope.row)">删除

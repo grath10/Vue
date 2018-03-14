@@ -46,7 +46,7 @@
           <el-table-column align="center" fixed label="序号" type="index" :index="initialIndex">
           </el-table-column>
           <el-table-column v-for="(item,index) in columns" :key="item" align="center" :label="item + ''">
-            <template scope="scope">
+            <template slot-scope="scope">
               <span>{{scope.row[index]}}</span>
             </template>
           </el-table-column>

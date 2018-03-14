@@ -50,7 +50,7 @@
             <!--表格-->
             <el-table v-if="!isFirst" :key="rightTableKey" :data="logList" v-loading.body="listLoading" fit style="width: 100%">
               <el-table-column align="center" fixed label="状态" width="100">
-                <template scope="scope">
+                <template slot-scope="scope">
                   <el-tag :type="formatLevel(scope.row.level)">{{showTip(scope.row.level)}}</el-tag>
                 </template>
               </el-table-column>
@@ -75,57 +75,57 @@
                     style="width: 100%">
             <el-table-column align="center" fixed label="序号" type="index" width="70" :index="startIndex"></el-table-column>
             <el-table-column align="center" label="采集时间" sortable width="200">
-              <template scope="scope">
+              <template slot-scope="scope">
                 <span>{{scope.row.collecttime}}</span>
               </template>
             </el-table-column>
             <el-table-column label="温度" align="center">
               <el-table-column align="center" label="平均值" sortable width="110">
-                <template scope="scope">
+                <template slot-scope="scope">
                   <span>{{scope.row.avgTemp}}</span>
                 </template>
               </el-table-column>
               <el-table-column align="center" label="最大值" sortable width="110">
-                <template scope="scope">
+                <template slot-scope="scope">
                   <span>{{scope.row.maxTemp}}</span>
                 </template>
               </el-table-column>
               <el-table-column align="center" label="最小值" sortable width="110">
-                <template scope="scope">
+                <template slot-scope="scope">
                   <span>{{scope.row.minTemp}}</span>
                 </template>
               </el-table-column>
             </el-table-column>
             <el-table-column label="湿度" align="center">
               <el-table-column align="center" label="平均值" sortable width="110">
-                <template scope="scope">
+                <template slot-scope="scope">
                   <span>{{scope.row.avgHumid}}</span>
                 </template>
               </el-table-column>
               <el-table-column align="center" label="最大值" sortable width="110">
-                <template scope="scope">
+                <template slot-scope="scope">
                   <span>{{scope.row.maxHumid}}</span>
                 </template>
               </el-table-column>
               <el-table-column align="center" label="最小值" sortable width="110">
-                <template scope="scope">
+                <template slot-scope="scope">
                   <span>{{scope.row.minHumid}}</span>
                 </template>
               </el-table-column>
             </el-table-column>
             <el-table-column label="氨气浓度" align="center">
               <el-table-column align="center" label="平均值" sortable width="110">
-                <template scope="scope">
+                <template slot-scope="scope">
                   <span>{{scope.row.avgGas}}</span>
                 </template>
               </el-table-column>
               <el-table-column align="center" label="最大值" sortable width="110">
-                <template scope="scope">
+                <template slot-scope="scope">
                   <span>{{scope.row.maxGas}}</span>
                 </template>
               </el-table-column>
               <el-table-column align="center" fixed="right" label="最小值" sortable width="110">
-                <template scope="scope">
+                <template slot-scope="scope">
                   <span>{{scope.row.minGas}}</span>
                 </template>
               </el-table-column>

@@ -13,7 +13,7 @@
       <el-table-column align="center" label="上限阈值" sortable="custom" prop="high"></el-table-column>
       <el-table-column align="center" label="下限阈值" sortable="custom" prop="low"></el-table-column>
       <el-table-column fixed="right" align="center" label="操作" width="150">
-        <template scope="scope">
+        <template slot-scope="scope">
           <el-button v-if="entity_btn_edit" size="small" type="success" @click="handleUpdate(scope.row)">编辑
           </el-button>
           <!-- <el-button v-if="entity_btn_del" size="small" type="danger" @click="handleDelete(scope.row)">删除
