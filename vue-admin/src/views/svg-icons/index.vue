@@ -19,6 +19,7 @@ import icons from './generateIconsView'
 import clipboard from '@/utils/clipboard' // use clipboard directly
 
 export default {
+  name: 'icons',
   data() {
     return {
       iconsMap: []
@@ -43,25 +44,28 @@ export default {
 
 <style rel="stylesheet/scss" lang="scss" scoped>
 .icons-container {
-  margin: 40px 20px 0;
+  margin: 10px 20px 0;
   overflow: hidden;
   .icons-wrapper {
     margin: 0 auto;
   }
   .icon-item {
     margin: 20px;
-    height: 137px;
+    height: 110px;
     text-align: center;
-    width: 120px;
+    width: 110px;
     float: left;
-    font-size: 40px;
-    color: #666;
+    font-size: 30px;
+    color: #24292e;
     cursor: pointer;
   }
   span {
     display: block;
     font-size: 24px;
     margin-top: 10px;
+  }
+  .disabled{
+    pointer-events: none;
   }
 }
 </style>

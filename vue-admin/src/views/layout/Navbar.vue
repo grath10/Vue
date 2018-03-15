@@ -28,8 +28,7 @@ import Levelbar from './Levelbar'
 import TabsView from './TabsView'
 import Hamburger from 'components/Hamburger'
 import Screenfull from 'components/Screenfull'
-import ErrorLog from 'components/ErrLog'
-import errLogStore from 'store/errLog'
+import ErrorLog from 'components/ErrorLog'
 
 export default {
   components: {
@@ -38,11 +37,6 @@ export default {
     Hamburger,
     ErrorLog,
     Screenfull
-  },
-  data() {
-    return {
-      log: errLogStore.state.errLog
-    }
   },
   computed: {
     ...mapGetters([
@@ -76,6 +70,9 @@ export default {
 					float: left;
 					padding: 0 10px;
 			}
+  .breadcrumb-container{
+    float: left;
+  }
 			.errLog-container {
 					display: inline-block;
 					position: absolute;

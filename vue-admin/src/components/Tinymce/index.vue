@@ -1,14 +1,16 @@
 <template>
-  <div class='tinymce-container editor-container'>
-    <textarea class='tinymce-textarea' :id="tinymceId"></textarea>
+  <div class="tinymce-container editor-container">
+    <textarea class="tinymce-textarea" :id="tinymceId"></textarea>
     <div class="editor-custom-btn-container">
-     <editorImage  color="#20a0ff" class="editor-upload-btn" @successCBK="imageSuccessCBK"></editorImage>
+      <editorImage color="#1890ff" class="editor-upload-btn" @successCBK="imageSuccessCBK"></editorImage>
       </div>
   </div>
 </template>
 
 <script>
 import editorImage from './components/editorImage'
+import plugins from './plugins'
+import toolbar from './toolbar'
 
 export default {
   name: 'tinymce',
@@ -25,11 +27,11 @@ export default {
       type: Array,
       required: false,
       default() {
-        return ['removeformat undo redo |  bullist numlist | outdent indent | forecolor | fullscreen code', 'bold italic blockquote | h2 p  media link | alignleft aligncenter alignright']
+        return []
       }
     },
     menubar: {
-      default: ''
+      default: 'file edit insert view format table'
     },
     height: {
       type: Number,
@@ -52,24 +54,32 @@ export default {
     }
   },
   mounted() {
+    this.initTinymce()
+  },
+  activated() {
+    this.initTinymce()
+  },
+  deactivated() {
+    this.destroyTinymce()
+  },
+  methods: {
+    initTinymce() {
     const _this = this
     window.tinymce.init({
       selector: `#${this.tinymceId}`,
       height: this.height,
       body_class: 'panel-body ',
       object_resizing: false,
-      toolbar: this.toolbar,
+        toolbar: this.toolbar.length > 0 ? this.toolbar : toolbar,
       menubar: this.menubar,
-      plugins: 'advlist,autolink,code,paste,textcolor, colorpicker,fullscreen,link,lists,media,wordcount, imagetools',
+        plugins: plugins,
       end_container_on_empty_block: true,
       powerpaste_word_import: 'clean',
       code_dialog_height: 450,
       code_dialog_width: 1000,
       advlist_bullet_styles: 'square',
       advlist_number_styles: 'default',
-      block_formats: '普通标签=p;小标题=h2;',
-      imagetools_cors_hosts: ['wpimg.wallstcn.com', 'wallstreetcn.com'],
-      imagetools_toolbar: 'watermark',
+        imagetools_cors_hosts: ['www.tinymce.com', 'codepen.io'],
       default_link_target: '_blank',
       link_title: false,
       init_instance_callback: editor => {
@@ -77,11 +87,11 @@ export default {
           editor.setContent(_this.value)
         }
         _this.hasInit = true
-        editor.on('NodeChange Change KeyUp', () => {
+          editor.on('NodeChange Change KeyUp SetContent', () => {
           this.hasChange = true
-          this.$emit('input', editor.getContent({ format: 'raw' }))
+            this.$emit('input', editor.getContent())
         })
-      },
+        }
           // 整合七牛上传
           // images_dataimg_filter(img) {
           //   setTimeout(() => {
@@ -115,41 +125,13 @@ export default {
           //     console.log(err);
           //   });
           // },
-      setup(editor) {
-        editor.addButton('h2', {
-          title: '小标题', // tooltip text seen on mouseover
-          text: '小标题',
-          onclick() {
-            editor.execCommand('mceToggleFormat', false, 'h2')
-          },
-          onPostRender() {
-            const btn = this
-            editor.on('init', () => {
-              editor.formatter.formatChanged('h2', state => {
-                btn.active(state)
-              })
-            })
-          }
         })
-        editor.addButton('p', {
-          title: '正文',
-          text: '正文',
-          onclick() {
-            editor.execCommand('mceToggleFormat', false, 'p')
           },
-          onPostRender() {
-            const btn = this
-            editor.on('init', () => {
-              editor.formatter.formatChanged('p', state => {
-                btn.active(state)
-              })
-            })
-          }
-        })
+    destroyTinymce() {
+      if (window.tinymce.get(this.tinymceId)) {
+        window.tinymce.get(this.tinymceId).destroy()
       }
-    })
   },
-  methods: {
     setContent(value) {
       window.tinymce.get(this.tinymceId).setContent(value)
     },
@@ -164,7 +146,7 @@ export default {
     }
   },
   destroyed() {
-    window.tinymce.get(this.tinymceId).destroy()
+    this.destroyTinymce()
   }
 }
 </script>
@@ -179,9 +161,9 @@ export default {
 }
 .editor-custom-btn-container {
   position: absolute;
-  right: 15px;
+  right: 4px;
+  top: 4px;
   /*z-index: 2005;*/
-  top: 18px;
 }
 .editor-upload-btn {
   display: inline-block;

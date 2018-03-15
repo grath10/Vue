@@ -70,7 +70,10 @@ export default {
 </script>
 
 <style scoped>
-  .box-card{
+.field-label{
+  vertical-align: middle;
+}
+.box-card {
     width: 400px;
     margin: 20px auto;
   }

@@ -9,14 +9,15 @@
 </template>
 
 <script>
-import { Navbar, Sidebar, AppMain } from 'views/layout'
+import { Navbar, Sidebar, AppMain, TagsView } from 'views/layout'
 
 export default {
   name: 'layout',
   components: {
     Navbar,
     Sidebar,
-    AppMain
+    AppMain,
+    TagsView
   },
   computed: {
     sidebar() {
